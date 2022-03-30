@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Post details</title>
+    <link rel="stylesheet" href="home_style.css">
+
+</head>
+
+<body>
+    <header>
+    </header>
+    <div class="main_title">
+        Posts
+    </div>
+    <hr>
+    <div class="container">
+        <div class="post_container">
+            <div class="head">
+                <div class="author">Author</div>
+                <div class="topic">Topic: post's titles</div>
+            </div>
+
+            <div class="post_body">
+                <div class="username">Username</div>
+
+                <div class="post_content">
+                    Display some random post contents here.
+                    <br>To see what it looks like
+                    <br><br>Nothing else
+                    <hr>
+                    <!--comment button-->
+                    <div class="comment">
+                        <button onclick="showCommentArea()">Comment</button>
+                    </div>
+                </div>
+
+            </div>
+            <!--comment area-->
+            <div hidden class="comment_area" id="comment_area">
+                <textarea name="comment" id="" placeholder="comment here..."></textarea>
+                <input type="submit" onclick="hideCommentArea()" name="" id="" value="submit">
+            </div>
+            <!--comment contents-->
+            <div class="comment_container" id="comment_container">
+                <div class="head">
+                    <div class="author">Author</div>
+                    <div class="topic">Comments</div>
+                </div>
+    
+                <div class="comment_body">
+                    <div class="username">Username</div>
+    
+                    <div class="comment_content">
+                        Display some random comments here.
+                        <br>To see what it looks like
+                        <br><br>Nothing else
+                        <hr>
+                        <!--reply button-->
+                        
+                    </div>
+    
+                </div>
+                <!--comment area-->
+                <div hidden class="comment_area" id="comment_area">
+                    <textarea name="comment" id="" placeholder="comment here..."></textarea>
+                    <input type="submit" onclick="hideCommentArea()" name="" id="" value="submit">
+                </div>
+                
+    
+            </div>
+
+        </div>
+
+
+
+
+
+        <!--footer-->
+        <footer>
+            <span>&copy; &nbsp; Learn Chinese Together | CS1530</span>
+        </footer>
+
+    </div>
+    
+
+    <script src="main.js"></script>
+</body>
+</html>

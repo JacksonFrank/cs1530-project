@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+}
+
+html{
+    margin: 0px 60px;
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: white;   
+}
+a{
+    color:black;
+    font-weight: bolder;
+    text-decoration: none;
+}
+h1{
+    font-size: 25px;
+    font-weight: bolder;
+}
+.container{
+    margin: 20px;
+    padding: 20px;
+}
+.subforum{
+    margin-top: 10px;
+}
+.subforum_title{
+    background-color: rgb(105, 103, 103);
+    padding: 6px;
+    border-radius: 10px;
+    margin: 40px 5px 5px;
+}
+.subforum_row{
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+}
+.subform_description, .pic, .subforum_info{
+    background-color: lightgrey;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0px 4px;
+}
+.subforum_stat{
+    margin: 10px 0;
+}
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+/*
+@font-face {
+    font-family: aquire;
+    src: url(aquire-font/AquireBold-8Ma60.otf);
+}
+*/
+.main_title{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 45px;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+footer{
+    margin-top: 60px;
+    display: block;
+}
+.footer_info{
+    margin: 150px 10px 0px;
+    padding: 0px 0px 0px;
+    font-weight: bolder;
+}
+
+/*Post*/
+.table_head{
+    display: flex;
+}
+.table_head div{
+    padding: 10px;
+    margin: 2px;
+    background-color:darkgray;
+    font-weight: bolder;
+}
+.table_head .users{
+    flex: 15%;
+}
+.table_head .subject{
+    flex: 65%;
+}
+.table_head .replies{
+    flex: 10%;
+}
+.table_head .date{
+    flex: 10%;
+}
+/*posts content*/
+.table_row{
+    display: flex;
+}
+.table_row div{
+    padding: 15px 20px 40px;
+    margin: 2px;
+    background-color:lightgrey;
+}
+.table_row .users{
+    flex: 15%;
+}
+.table_row .subject{
+    flex: 65%;
+}
+.table_row .replies{
+    flex: 10%;
+}
+.table_row .date{
+    flex: 10%;
+}
+  
+/*post detail*/
+.head{
+    display: flex;
+    padding: 7px;
+    font-weight: bolder;
+    font-size: 15px;
+    background-color: gray;
+}
+.head .author{
+    flex: 20%;
+}
+.head .topic{
+    flex: 80%;
+}
+.username{
+    flex: 20%
+}
+.post_container{
+    margin-top: 40px;
+}
+.post_content, .comment_content{
+    flex: 80%;
+}
+.post_body, .comment_body{
+    display: flex;
+    background-color: lightgrey;
+    margin-top: 6px;
+    padding: 20px;
+}
+.username, .post_content, .comment_content{
+    font-size: 19px;
+}
+.post_content .comment button{
+    border: none;
+    padding: 10px;
+    font-weight: bolder;
+    cursor: pointer;
+    float: right;
+}
+/*comments*/
+.comment_area{
+    margin-top: 50px;
+}
+.comment_area textarea{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-block: 10px;
+}
+.comment_area input{/*submit button*/
+    float: right;
+    padding: 10px;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.comment_container{
+    margin-top: 60px;
+}
+
