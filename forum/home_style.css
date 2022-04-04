@@ -2,8 +2,14 @@
     box-sizing: border-box;
 }
 
+body{
+    margin: 0px;
+}
+hr{
+    margin: 0px;
+}
 html{
-    margin: 0px 60px;
+    margin: 0px 0px;
     font-size: 16px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: white;   
@@ -55,11 +61,12 @@ h1{
 }
 */
 .main_title{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 45px;
+    font-size: 40px;
     display: inline-block;
-    margin-bottom: 20px;
-    padding: 0px;
+    margin-bottom: 0px;
+    background-color:silver;
+    width: 100%;
+    height: 60px;
 }
 footer{
     margin-top: 60px;
@@ -72,6 +79,18 @@ footer{
 }
 
 /*Post*/
+.page_header{
+    background-color:rgb(105, 103, 103);
+}
+.page_header .post_title{
+    padding: 10px;
+}
+.page_header .post_button button{
+    margin: 10px;
+    padding: 10px;
+    font-weight: bolder;
+    cursor: pointer;
+}
 .table_head{
     display: flex;
 }
@@ -154,6 +173,37 @@ footer{
     cursor: pointer;
     float: right;
 }
+/*Post area*/
+label{
+    display: block;
+    margin: 20px 70px 0px;
+}
+
+.post_area #subject{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 40px;
+}
+
+.post_area #content{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 100px;
+}
+
+.post_area input{
+    float: right;
+    padding: 10px;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
 /*comments*/
 .comment_area{
     margin-top: 50px;

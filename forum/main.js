@@ -1,7 +1,17 @@
+function showPostArea(){
+    let postArea = document.getElementById("post_area");
+    if(postArea.style.display == "none"){
+        postArea.setAttribute("style", "display:block;");
+    }else{
+        postArea.setAttribute("style", "display:none;");
+    }
+}
+
 function showCommentArea(){
     let commentArea = document.getElementById("comment_area");
     commentArea.setAttribute("style", "display:block;");
 }
+
 function hideCommentArea(){
     let commentArea = document.getElementById("comment_area");
     commentArea.setAttribute("style", "display:none;");

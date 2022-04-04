@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>Posts Page</title>
+    <title>Learn Chinese Together - Post Page</title>
     <link rel="stylesheet" href="home_style.css">
 </head>
 
 <body>
-    <header>
-    </header>
     <div class="main_title">
-        Post Page
+        Learn Chinese Together
     </div>
     <hr>
     <div class="container">
+        <div class="page_header">
+            <div class="post_title">
+                <h1>POSTS</h1>
+            </div>
+            <div class="post_button">
+                <button onclick="showPostArea()">Add Post</button>
+            </div>
+        </div>
+        
        <div class="posts_table">
            <div class="table_head">
                 <div class="users">Author</div>
@@ -41,6 +48,17 @@
                <div class="date">2022/3/28</div>
            </div>
 
+            <!--post area-->
+            <div class="post_area" id="post_area" style="display: none;">
+                <label>Title</label>
+                <textarea id="subject" placeholder="Enter title here..."></textarea>
+                <label>Content</label>
+                <textarea id="content" placeholder="Enter content here..."></textarea>
+                <br>
+                <input type="submit" onclick="" name="" id="" value="submit">
+            </div>
+            
+
        </div>
 
         <!--footer-->
@@ -52,6 +70,7 @@
 
     </div>
     
+    <script src="main.js"></script>
 
 
 </body>
