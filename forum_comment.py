@@ -13,17 +13,18 @@ class ForumComment:
             self.time_commented = data[1]
             self.content = data[2]
     
-    def setAuthor(self, author: str):
+    def createComment(self, author: str, content: str):
         self.author = author
+        self.time_commented = datetime.now(timezone.utc)
+        self.content = content
+    
     def getAuthor(self):
         return self.author
     
-    def createNow(self):
-        self.time_commented = datetime.now(timezone.utc)
     def getTimeCommented(self):
         return self.time_commented
 
-    def setContent(self, content: str):
-        self.content = content
     def getContent(self):
         return self.content
+
+    
