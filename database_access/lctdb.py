@@ -92,6 +92,18 @@ class LCTDB:
 
         cur.close()
         return result
+    
+    def quizCompleted(self, username: str, quizzesCompleted: int):
+        cur = self.con.cursor()
+        sql = """UPDATE LCTUSER SET quizzes_completed = %s WHERE username = %s;"""
+
+        try:
+            cur.execute(sql, (quizzesCompleted, username))
+            self.con.commit()
+        except:
+            print("Couldn't update " + username + " quiz taken count")
+        
+        cur.close()
 
     # removes the given user from the database
     # will also remove all of the user's posts and comments, and all comments of the user's posts
