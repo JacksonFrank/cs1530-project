@@ -9,7 +9,7 @@ else:
     sys.exit()
 
 db_connection.registerUser("jackson", "abc123")
-db_connection.authenticateUser("jackson", "abc123")
-db_connection.authenticateUser("jackson", "wrongpassword")
+print("auth with right credentials: " + str(db_connection.authenticateUser("jackson", "abc123")))
+print("auth with wrong credentials: " + str(db_connection.authenticateUser("jackson", "wrongpassword")))
 
 db_connection.closeCon()

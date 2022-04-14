@@ -12,23 +12,18 @@ CREATE TABLE LCTUSER (
     CONSTRAINT USERNAME_PK PRIMARY KEY (username)
 );
 
-DROP TRIGGER IF EXISTS hash_password_tr ON LCTUSER;
-CREATE TRIGGER hash_password_tr
-    BEFORE INSERT ON LCTUSER
-    EXECUTE PROCEDURE hash_password();
-    
-
-CREATE OR REPLACE FUNCTION hash_password() RETURNS TRIGGER AS $$
+CREATE OR REPLACE PROCEDURE register_user(_username varchar(20), _password TEXT)
+LANGUAGE plpgsql
+AS $$
 BEGIN
-    NEW.password = crypt(NEW.password, gen_salt('bf'));
-    RETURN NEW;
+    INSERT INTO LCTUSER (username, password) VALUES (_username, crypt(_password, gen_salt('bf')));
     END;
-$$ LANGUAGE plpgsql;
+$$;
 
 
-CREATE OR REPLACE FUNCTION authenticate_user(username varchar(20), password TEXT) RETURNS BOOLEAN AS $$
+CREATE OR REPLACE FUNCTION authenticate_user(_username varchar(20), _password TEXT) RETURNS BOOLEAN AS $$
 BEGIN
-    IF (SELECT COUNT(*) FROM LCTUSER WHERE LCTUSER.username = username AND LCTUSER.password = crypt(password, LCTUSER.password)) = 1 THEN
+    IF (SELECT COUNT(*) FROM LCTUSER WHERE LCTUSER.username = _username AND LCTUSER.password = crypt(_password, LCTUSER.password)) = 1 THEN
         RETURN TRUE;
     ELSE
         RETURN FALSE;

@@ -28,6 +28,6 @@ class LCTDB:
     def authenticateUser(self, username: str, password: str):
         cur = self.con.cursor()
         cur.callproc('authenticate_user', (username, password))
-        result = cur.fetchall()
-        print(result)
+        result = cur.fetchone()
         cur.close()
+        return result[0]
