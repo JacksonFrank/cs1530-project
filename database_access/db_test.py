@@ -13,5 +13,6 @@ db_connection.registerUser('jackson', 'abc123')
 print("does the user we just created exist?: " + str(db_connection.doesUserExist('jackson')))
 print("auth with right credentials: " + str(db_connection.authenticateUser('jackson', 'abc123')))
 print("auth with wrong credentials: " + str(db_connection.authenticateUser('jackson', 'wrongpassword')))
+print("amount of quizzes the user has completed: " + str(db_connection.getQuizesCompleted('jackson')))
 
 db_connection.closeCon()
