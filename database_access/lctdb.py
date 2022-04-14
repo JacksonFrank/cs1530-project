@@ -3,15 +3,26 @@
 
 import psycopg2
 from datetime import datetime, timezone
+import sys
+
+from configparser import ConfigParser
 
 class LCTDB: 
 
     # initalizing this class will create a new connection to the database
-    def __init__(self, username: str, password: str):
+    def __init__(self):
         print("Initializing database connection...")
 
+        # this is a hardcoded solution, might want to change this
+        parser = ConfigParser()
+        parser.read('../config/database.ini')
+        params = parser.items('postgresql')
+        db_params = {}
+        for param in params:
+            db_params[param[0]] = param[1]
+
         try:
-            self.con = psycopg2.connect("dbname=lctdb user=" + username + " password=" + password + " host=localhost")
+            self.con = psycopg2.connect(**db_params)
         except:
             sys.exit("Could not connect to the database")
         
@@ -133,29 +144,28 @@ class LCTDB:
     # add a forum post to the database
     # automatically generates current timestamp for post
     # title at most can be 140 characters
-    def createForumPost(self, title: str, author: str, content: str):
+    def createForumPost(self, title: str, author: str, post_time: datetime, content: str):
         cur = self.con.cursor()
         current_time = datetime.now(timezone.utc)
         sql = """INSERT INTO FORUM_POST VALUES (%s, %s, %s, %s);"""
 
         try:
-            cur.execute(sql, (title, author, current_time, content))
+            cur.execute(sql, (title, author, post_time, content))
             self.con.commit()
         except:
-            print("error saving forum post: " + title + " by " + author)
+            print("error saving forum post: " + post.getTitle() + " by " + post.getAuthor())
         
         cur.close()
 
     # add a comment to a forum post in the database
     # automatically generates current timestamp for comment
     # must provide the title, author, and timestamp of a valid post
-    def createForumComment(self, author: str, content: str, post_title: str, post_author: str, post_time: datetime):
+    def createForumComment(self, author: str, comment_time: datetime, content: str, post_title: str, post_author: str, post_time: datetime):
         cur = self.con.cursor()
-        current_time = datetime.now(timezone.utc)
         sql = """INSERT INTO FORUM_COMMENT VALUES (%s, %s, %s, %s, %s, %s);"""
 
         try:
-            cur.execute(sql, (author, current_time, content, post_title, post_author, post_time))
+            cur.execute(sql, (author, comment_time, content, post_title, post_author, post_time))
             self.con.commit()
         except:
             print("error saving forum comment on " + post_title + " by " + author)
