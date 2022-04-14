@@ -1,0 +1,3 @@
+CREATE DATABASE lctdb
+    OWNER lctapp
+    ENCODING UTF8;
