@@ -4,6 +4,10 @@
 import psycopg2
 from datetime import datetime, timezone
 
+sys.path.append("..")
+from forum_post import ForumPost
+from forum_comment import ForumComment
+
 class LCTDB: 
 
     # initalizing this class will create a new connection to the database
@@ -133,16 +137,16 @@ class LCTDB:
     # add a forum post to the database
     # automatically generates current timestamp for post
     # title at most can be 140 characters
-    def createForumPost(self, title: str, author: str, content: str):
+    def createForumPost(self, post: ForumPost):
         cur = self.con.cursor()
-        current_time = datetime.now(timezone.utc)
+        #current_time = datetime.now(timezone.utc)
         sql = """INSERT INTO FORUM_POST VALUES (%s, %s, %s, %s);"""
 
         try:
-            cur.execute(sql, (title, author, current_time, content))
+            cur.execute(sql, (post.getTitle(), post.getAuthor(), post.getTimePosted(), post.getContent()))
             self.con.commit()
         except:
-            print("error saving forum post: " + title + " by " + author)
+            print("error saving forum post: " + post.getTitle() + " by " + post.getAuthor())
         
         cur.close()
 
@@ -178,8 +182,12 @@ class LCTDB:
         except:
             print("error retrieving recent posts")
         
+        post_results = []
+        for data in result:
+            post_results.append(ForumPost(data))
+        
         cur.close()
-        return result
+        return post_results
     
     # retrieves recent comments of the given post from the database
     # retrieves only up to the given limit number of comments, default limit is 10

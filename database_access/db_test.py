@@ -2,6 +2,9 @@ from lctdb import LCTDB
 import sys
 from datetime import datetime, timezone
 
+sys.path.append("..")
+from forum_post import ForumPost
+
 
 if (len(sys.argv) == 3):
     db_connection = LCTDB(sys.argv[1], sys.argv[2])
