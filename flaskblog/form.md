@@ -1,4 +1,3 @@
-pip install flask-wtf (probably need to install this)
 
 windows: set FLASK_APP=flaskblog / $env:FLASK_APP="flaskblog"
 Mac: export FLASK_APP=flaskblog.py
