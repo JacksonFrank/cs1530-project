@@ -21,7 +21,7 @@ CREATE TABLE FORUM_COMMENT (
     post_title varchar(140) NOT NULL,
     post_author varchar(20) NOT NULL,
     post_time timestamp NOT NULL,
-    CONSTRAINT COMMENT_PK PRIMARY KEY (author, time_commented),
+    CONSTRAINT COMMENT_PK PRIMARY KEY (author, time_commented, post_title, post_author, post_time),
     CONSTRAINT COMMENT_FK FOREIGN KEY (post_title, post_author, post_time) REFERENCES FORUM_POST(title, author, time_posted),
     CONSTRAINT AUTHOR_FK FOREIGN KEY (author) REFERENCES LCTUSER(username),
     CONSTRAINT POST_AUTHOR_FK FOREIGN KEY (post_author) REFERENCES LCTUSER(username)

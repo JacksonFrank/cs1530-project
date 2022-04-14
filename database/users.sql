@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS LCTUSER CASCADE;
 CREATE TABLE LCTUSER (
     username varchar(20),
     password TEXT NOT NULL,
-    quizes_completed int DEFAULT 0,
+    quizzes_completed int DEFAULT 0,
     CONSTRAINT USERNAME_PK PRIMARY KEY (username)
 );
 
