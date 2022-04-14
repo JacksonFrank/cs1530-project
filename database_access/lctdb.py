@@ -179,11 +179,11 @@ class LCTDB:
         sql = """SELECT author, time_commented, content FROM FORUM_COMMENT WHERE post_title = %s AND post_author = %s AND post_time = %s ORDER BY time_commented DESC LIMIT %s OFFSET %s;"""
         result = None
         
-        #try:
-        cur.execute(sql, (post_title, post_author, post_time, limit, start))
-        result = cur.fetchall()
-        #except:
-        #    print("error retrieving recent comments for post " + post_title + " by " + post_author)
+        try:
+            cur.execute(sql, (post_title, post_author, post_time, limit, start))
+            result = cur.fetchall()
+        except:
+            print("error retrieving recent comments for post " + post_title + " by " + post_author)
         
         cur.close()
         return result
