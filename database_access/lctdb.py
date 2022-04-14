@@ -227,5 +227,53 @@ class LCTDB:
         except:
             print("error deleting comment on " + post_title + " by " + author)
 
-        cur.close()          
+        cur.close()   
+
+    '''
+    ---------------------------------------------------------------------------------------------
+    QUIZ DATABASE
+    ---------------------------------------------------------------------------------------------
+    '''
+
+    # Gets translation pairs to act as quiz questions of given level
+    # Returns translation pairs
+    # Returns null if there was an error
+    def getQuizQuestions(self, level: int):
+        cur = self.con.cursor()
+        sql = """SELECT english_tr, mandarin_tr FROM QUIZ WHERE level = %s;"""
+        result = None
+
+        try:
+            cur.execute(sql, (level,))
+            result = cur.fetchall()
+        except:
+            print("error retrieving quiz questions")
+        
+        cur.close()
+        return result
+    
+    # Gets the specified number of random quiz answers for a certain kind of translation answer excluding the given right answer
+    # Returns the random quiz answers
+    # Returns None if there was an error
+    # May return less answers than specified if the Quiz table doesn't have enough translation pairs
+    def getRandomAnswers(self, english_ans: bool, correct_ans: str, num_ans: int):
+        cur = self.con.cursor()
+        sql = """"""
+        if (english_ans):
+            sql = """SELECT english_tr FROM QUIZ WHERE english_tr != %s ORDER BY RANDOM() LIMIT %s;"""
+        else:
+            sql = """SELECT mandarin_tr FROM QUIZ WHERE mandarin_tr != %s ORDER BY RANDOM() LIMIT %s;"""
+        result = None
+
+        #try:
+        cur.execute(sql, (correct_ans, num_ans))
+        result = cur.fetchall()
+        #except:
+        #    print("error retrieving random quiz answers")
+        
+        cur.close()
+        return result
+
+
+
 
