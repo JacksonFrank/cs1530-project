@@ -8,8 +8,10 @@ else:
     print("Need to include username and password to database in cmd line arguments (Form: db_test.py <username> <password>")
     sys.exit()
 
-db_connection.registerUser("jackson", "abc123")
-print("auth with right credentials: " + str(db_connection.authenticateUser("jackson", "abc123")))
-print("auth with wrong credentials: " + str(db_connection.authenticateUser("jackson", "wrongpassword")))
+print("does the user we're about to create exist?: " + str(db_connection.doesUserExist('jackson')))
+db_connection.registerUser('jackson', 'abc123')
+print("does the user we just created exist?: " + str(db_connection.doesUserExist('jackson')))
+print("auth with right credentials: " + str(db_connection.authenticateUser('jackson', 'abc123')))
+print("auth with wrong credentials: " + str(db_connection.authenticateUser('jackson', 'wrongpassword')))
 
 db_connection.closeCon()

@@ -31,3 +31,10 @@ class LCTDB:
         result = cur.fetchone()
         cur.close()
         return result[0]
+
+    def doesUserExist(self, username: str):
+        cur = self.con.cursor()
+        sql = """SELECT * FROM LCTUSER WHERE USERNAME = %s;"""
+        cur.execute(sql, (username,))
+        result = cur.fetchall()
+        return len(result) >= 1
