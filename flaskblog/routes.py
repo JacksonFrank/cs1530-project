@@ -1,21 +1,31 @@
-from turtle import title
 from flask import render_template, url_for, flash, redirect #从flask包导入Flask类
 from flaskblog import app
 from flaskblog.forms import PostForm, CommentForm   #forms is in flaskblog
 
+from database_access.lctdb import LCTDB
+import sys
+sys.path.append("..")
+
+db_connection = LCTDB()
+
 posts = [
     {
+        'id': 1,
         'author': 'Zirui Huang',
         'title': 'Post 1',
         'date': '2022/4/11',
-        'reply': 2
+        'reply': 2,
+        'content': 'This is my first post!'
     },
 
-    {
+    {   
+        'id': 2,
         'author': 'Haoxuan Huang',
         'title': 'Post 2',
         'date': '2022/4/10',
-        'reply': 4
+        'reply': 4,
+        'content': 'This is my second post!'
+
 
     }
 ]
@@ -40,3 +50,8 @@ def new_post():
         return redirect(url_for('home'))   #redirect to 'about' route (name of template)
 
     return render_template('create_post.html', title='New Post', form=form) 
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = posts[0] #get post from database
+    return render_template('post.html', title=post['title'], post=post)
