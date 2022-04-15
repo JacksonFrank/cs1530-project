@@ -1,5 +1,5 @@
 from datetime import timezone, datetime
-from flask import render_template, url_for, flash, redirect #从flask包导入Flask类
+from flask import render_template, request, url_for, flash, redirect #从flask包导入Flask类
 from flaskblog import app
 from flaskblog.forms import PostForm, CommentForm   #forms is in flaskblog
 
@@ -9,7 +9,7 @@ import sys
 sys.path.append("..")
 
 db_connection = LCTDB()
-'''
+
 posts = [
     {
         'id': 1,
@@ -20,18 +20,8 @@ posts = [
         'content': 'This is my first post!'
     },
 
-    {   
-        'id': 2,
-        'author': 'Haoxuan Huang',
-        'title': 'Post 2',
-        'date': '2022/4/10',
-        'reply': 4,
-        'content': 'This is my second post!'
-
-
-    }
 ]
-'''
+
 @app.route("/")
 @app.route("/about")
 def about():
@@ -58,7 +48,10 @@ def new_post():
 
     return render_template('create_post.html', title='New Post', form=form) 
 
-@app.route("/post/<int:post_id>")
-def post(post_id):
-    #post = posts[0] #get post from database
-    return render_template('post.html', title=post['title'], post=post)
+@app.route("/post/<post_title>")
+def post(post_title):
+    author = request.args.get('post_author')
+    time = request.args.get('post_time')
+    #get specific post
+    post = ForumPost.getPost(post_title, author, time)
+    return render_template('post.html', title=post_title, post=post)
