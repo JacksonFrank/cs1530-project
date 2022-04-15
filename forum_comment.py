@@ -13,17 +13,17 @@ class ForumComment:
             self.time_commented = data[1]
             self.content = data[2]
     
+    # Initializes comment data for this instance of a forum comment
+    # Doesn't save the comment to the database
     def createComment(self, author: str, content: str):
         self.author = author
         self.time_commented = datetime.now(timezone.utc)
         self.content = content
     
     def getAuthor(self):
-        return self.author
-    
+        return self.author 
     def getTimeCommented(self):
         return self.time_commented
-
     def getContent(self):
         return self.content
 
