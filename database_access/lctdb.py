@@ -15,7 +15,7 @@ class LCTDB:
 
         # this is a hardcoded solution, might want to change this
         parser = ConfigParser()
-        parser.read('../config/database.ini')
+        parser.read('config/database.ini')
         params = parser.items('postgresql')
         db_params = {}
         for param in params:
