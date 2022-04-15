@@ -8,7 +8,7 @@ from forum_post import ForumPost
 import sys
 sys.path.append("..")
 
-#db_connection = LCTDB()
+db_connection = LCTDB()
 '''
 posts = [
     {
@@ -49,10 +49,12 @@ def new_post():
     form = PostForm() #initialize a form
 
     if form.validate_on_submit():               #check if validated when submitted (create post)
+        db_connection.registerUser("Zirui", "123456789")
         post = ForumPost()
         post.createPost(form.title.data, "Zirui", form.content.data)
+        print(form.title.data)
         flash('Post has been created successfully', 'success')
-        return redirect(url_for('home'))                        
+        return redirect(url_for('home'))        
 
     return render_template('create_post.html', title='New Post', form=form) 
 
