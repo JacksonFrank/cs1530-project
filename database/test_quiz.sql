@@ -1,0 +1,10 @@
+INSERT INTO QUIZ VALUES ('hi', 'hello', 5);
+INSERT INTO QUIZ VALUES ('bye', 'ciao', 5);
+INSERT INTO QUIZ VALUES ('pizza', 'bread', 1);
+INSERT INTO QUIZ VALUES ('toaster', 'toast', 1);
+INSERT INTO QUIZ VALUES ('pie', 'cherry', 2);
+INSERT INTO QUIZ VALUES ('burger', 'cheese', 2);
+INSERT INTO QUIZ VALUES ('sushi', 'tuna', 3);
+INSERT INTO QUIZ VALUES ('salad', 'caeser', 3);
+INSERT INTO QUIZ VALUES ('soup', 'chicken noodle', 4);
+INSERT INTO QUIZ VALUES ('steak', 'filet mignon', 4);
