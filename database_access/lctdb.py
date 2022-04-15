@@ -153,8 +153,9 @@ class LCTDB:
             cur.execute(sql, (title, author, post_time, content))
             self.con.commit()
         except:
-            print("error saving forum post: " + post.getTitle() + " by " + post.getAuthor())
-        
+            #print("error saving forum post: " + post.getTitle() + " by " + post.getAuthor())
+            print("error saving forum post")
+
         cur.close()
 
     # add a comment to a forum post in the database
