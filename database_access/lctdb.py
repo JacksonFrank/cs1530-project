@@ -172,6 +172,21 @@ class LCTDB:
         
         cur.close()
 
+    # retrieves a specific post based on its title, author, and timestamp
+    def getPost(self, title: str, author: str, time_posted: datetime):
+        cur = self.con.cursor()
+        sql = """SELECT * FROM FORUM_POST WHERE title = %s AND author = %s AND time_posted = %s;"""
+        result = None
+
+        try:
+            cur.execute(sql, (title, author, time_posted))
+            result = cur.fetchone()
+        except:
+            print("error retrieving post " + title + " by " + author)
+        
+        cur.close()
+        return result
+
     # retrieves recent posts from the database
     # retrieves only up to the given limit number of posts, default limit is 10
     # will skip the given start amount of posts when retrieving most recent posts, default start is 0

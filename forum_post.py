@@ -85,3 +85,13 @@ class ForumPost:
         db_connection.closeCon()
         return posts
 
+    # static method to retrieve a specific post based on its title, author, and timestamp
+    # returns a ForumPost object
+    @staticmethod
+    def getPost(title: str, author: str, time_posted: datetime):
+        db_connection = LCTDB()
+        post_data = db_connection.getPost(title, author, time_posted)
+        db_connection.closeCon()
+        return ForumPost(post_data)
+    
+

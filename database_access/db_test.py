@@ -44,6 +44,11 @@ print("the posts the user just made:")
 retrieved_posts = ForumPost.getRecentPosts()
 print(retrieved_posts)
 
+# retrieving a specific post from the database again by having its title, author, and timestamp
+requed_post = ForumPost.getPost(retrieved_posts[0].getTitle(), retrieved_posts[0].getAuthor(), retrieved_posts[0].getTimePosted())
+print("original post: " + retrieved_posts[0].getTitle() + " by " + retrieved_posts[0].getAuthor())
+print("re-queued post: " + requed_post.getTitle() + " by " + requed_post.getAuthor())
+
 # create two comments and add them to the first post we created, saves comments to database
 comment1 = ForumComment()
 comment1.createComment('jackson', 'this is a comment on post1!')
