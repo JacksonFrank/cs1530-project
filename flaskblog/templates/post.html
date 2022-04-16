@@ -11,12 +11,10 @@
               <p class="article-content">{{ post.content }}</p>
             </div>
           </article>
-        <a href="/post/new" class="btn btn-outline-info mb-4" role="button">
-            Comment
-        </a>
+        
 
         <!--comment textarea-->
-        <div class="content-section">
+        <div id="comment-area" class="content-section collapse in">
           <form method="POST", action="">
               {{ form.hidden_tag() }} 
               <fieldset class="form-group">   <!--group a set of elements-->
@@ -50,6 +48,10 @@
             <p class="article-content">{{ post.content }}</p>
           </div>
         </article>
+
+        <a href="#comment-area" class="btn btn-outline-info mb-4" role="button" data-toggle="collapse">
+          Comment
+      </a>
 
 
     {% endblock content %}
