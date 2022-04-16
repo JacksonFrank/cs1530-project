@@ -40,13 +40,23 @@ def new_post():
 
     return render_template('create_post.html', title='New Post', form=form) 
 
-@app.route("/post/<post_title>")
+@app.route("/post/<post_title>", methods=['GET', 'POST'])
 def post(post_title):
     #post information
     author = request.args.get('post_author')
     time = request.args.get('post_time')
     post = ForumPost.getPost(post_title, author, time)
+
     #comments
     form = CommentForm()
-    comments = []
+    if form.validate_on_submit():
+        #create a new comment
+        comment = ForumComment()
+        comment.createComment("Zirui", form.content.data)
+        post.addComment(comment)
+        print(comment.content)
+        flash('Comment has been created successfully', 'success')
+        return redirect(url_for('home'))
+
+    comments = post.getRecentComments()
     return render_template('post.html', title=post_title, post=post, comments=comments, form=form)
