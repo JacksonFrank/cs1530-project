@@ -5,9 +5,9 @@
     <form method="POST", action="">
         {{ form.hidden_tag() }} 
         <fieldset class="form-group">   <!--group a set of elements-->
-            <legend>New Post</legend>   <!--title-->
+            <legend>New Post</legend> 
             <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
+                {{ form.title.label(class="form-control-label") }}  <!--title-->
                 {% if form.title.errors %}
                     {{ form.title(class="form-control form-control-lg") }}
                     <div class="invalid-feedback">
@@ -20,7 +20,7 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.content.label(class="form-control-label") }}
+                {{ form.content.label(class="form-control-label") }}    <!--content-->
                 {% if form.content.errors %}
                     {{ form.content(class="form-control form-control-lg") }}
                     <div class="invalid-feedback">
@@ -32,7 +32,7 @@
                     {{ form.content(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <div class="form-group">
+            <div class="form-group">    <!--submit button-->
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
 
