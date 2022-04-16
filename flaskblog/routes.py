@@ -1,5 +1,4 @@
 from datetime import timezone, datetime
-from xml.etree.ElementTree import Comment
 from flask import render_template, request, url_for, flash, redirect #从flask包导入Flask类
 from flaskblog import app
 from flaskblog.forms import PostForm, CommentForm   #forms is in flaskblog
@@ -42,7 +41,7 @@ def new_post():
 
 @app.route("/post/<post_title>", methods=['GET', 'POST'])
 def post(post_title):
-    #post information
+    #get a post
     author = request.args.get('post_author')
     time = request.args.get('post_time')
     post = ForumPost.getPost(post_title, author, time)
@@ -60,3 +59,16 @@ def post(post_title):
 
     comments = post.getRecentComments()
     return render_template('post.html', title=post_title, post=post, comments=comments, form=form)
+
+@app.route("/post/<post_title>/delete", methods=['POST'])
+def delete_post(post_title):
+    #get a post
+    author = request.args.get('post_author')
+    time = request.args.get('post_time')
+    post = ForumPost.getPost(post_title, author, time)
+
+    #only the user who wrote it can update
+    #if post.author != current_user: abort(403)
+    post.deletePost()
+
+    return redirect(url_for('home'))
