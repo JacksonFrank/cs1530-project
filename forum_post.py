@@ -58,6 +58,17 @@ class ForumPost:
         db_connection = LCTDB()
         db_connection.createForumComment(comment.getAuthor(), comment.getTimeCommented(), comment.getContent(), self.title, self.author, self.time_posted)
         db_connection.closeCon()
+    
+    # gets a specific comment from this post given the author and time of the comment
+    # returns none if an error occurs
+    def getComment(self, author: str, time_commented: datetime):
+        db_connection = LCTDB()
+        result_data = db_connection.getComment(self.title, self.author, self.time_posted, author, time_commented)
+        db_connection.closeCon()
+        if (result_data == None):
+            return None
+        return ForumComment(result_data)
+
 
     # deletes this post from the database
     def deletePost(self):

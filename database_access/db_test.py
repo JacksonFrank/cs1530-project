@@ -62,6 +62,11 @@ retrieved_comments = post1.getRecentComments()
 print("the comments on post 1 the user just made:")
 print(retrieved_comments)
 
+# retrieving a specific comment from the database
+specific_comment = post1.getComment(retrieved_comments[0].getAuthor(), retrieved_comments[0].getTimeCommented())
+print("specific retrieved comment by " + specific_comment.getAuthor() + ":")
+print(specific_comment.getContent())
+
 # delete the first comment we made on the 1st post from the database
 post1.deleteComment(comment1)
 

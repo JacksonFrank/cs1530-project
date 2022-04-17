@@ -224,6 +224,23 @@ class LCTDB:
         
         cur.close()
         return result
+
+    # retrieves a given comment from the given post from the database
+    def getComment(self, post_title: str, post_author: str, post_time: str, author: str, time_commented: str):
+        cur = self.con.cursor()
+        sql = """SELECT author, time_commented, content FROM FORUM_COMMENT
+                 WHERE post_title = %s AND post_author = %s AND post_time = %s AND
+                 author = %s AND time_commented = %s;"""
+        result = None
+
+        try:
+            cur.execute(sql, (post_title, post_author, post_time, author, time_commented))
+            result = cur.fetchone()
+        except:
+            print("error retrieving comment on " + post_title + " by " + author)
+        
+        cur.close()
+        return result
     
     # deletes the given post from the database
     # will also delete all of the comments on the given post
