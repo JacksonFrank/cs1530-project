@@ -70,5 +70,6 @@ def delete_post(post_title):
     #only the user who wrote it can update
     #if post.author != current_user: abort(403)
     post.deletePost()
+    flash('Post has been deleted successfully!', 'success')
 
     return redirect(url_for('home'))
