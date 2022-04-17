@@ -33,7 +33,7 @@ print(question1.getWrongAnswers())
 print("quiz questions left: " + str(quiz_questions.questionsLeft()))
 
 # says that the user we created completed quiz 1
-db_connection.quizCompleted('jackson', 1)
+quiz_questions.quizCompleted('jackson')
 print("number of quizzes the user has completed after completing the first quiz: " + str(db_connection.getQuizzesCompleted('jackson')))
 
 # create two posts and save them to the database
