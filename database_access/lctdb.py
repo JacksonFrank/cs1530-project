@@ -227,6 +227,7 @@ class LCTDB:
         return result
 
     # retrieves a given comment from the given post from the database
+    # returns none if an error occurs
     def getComment(self, post_title: str, post_author: str, post_time: str, author: str, time_commented: str):
         cur = self.con.cursor()
         sql = """SELECT author, time_commented, content FROM FORUM_COMMENT
@@ -308,11 +309,11 @@ class LCTDB:
             sql = """SELECT mandarin_tr FROM QUIZ WHERE mandarin_tr != %s ORDER BY RANDOM() LIMIT %s;"""
         result = None
 
-        #try:
-        cur.execute(sql, (correct_ans, num_ans))
-        result = cur.fetchall()
-        #except:
-        #    print("error retrieving random quiz answers")
+        try:
+            cur.execute(sql, (correct_ans, num_ans))
+            result = cur.fetchall()
+        except:
+            print("error retrieving random quiz answers")
         
         cur.close()
         return result
