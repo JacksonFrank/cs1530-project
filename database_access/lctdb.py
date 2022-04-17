@@ -104,6 +104,7 @@ class LCTDB:
         cur.close()
         return result
     
+    # saves that the given user has completed the given amount of quizzes in the database
     def quizCompleted(self, username: str, quizzesCompleted: int):
         cur = self.con.cursor()
         sql = """UPDATE LCTUSER SET quizzes_completed = %s WHERE username = %s;"""
@@ -282,7 +283,7 @@ class LCTDB:
     # Returns null if there was an error
     def getQuizQuestions(self, level: int):
         cur = self.con.cursor()
-        sql = """SELECT english_tr, mandarin_tr FROM QUIZ WHERE level = %s;"""
+        sql = """SELECT english_tr, mandarin_tr FROM QUIZ WHERE level = %s ORDER BY RANDOM();"""
         result = None
 
         try:
