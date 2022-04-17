@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 sys.path.append("..")
 from forum_post import ForumPost
 from forum_comment import ForumComment
+from quiz import Quiz, QuizQuestion
 
 # gets an initial connection to the database
 db_connection = LCTDB()
@@ -22,15 +23,17 @@ print("auth with wrong credentials: " + str(db_connection.authenticateUser('jack
 print("number of quizzes the user has completed: " + str(db_connection.getQuizzesCompleted('jackson')))
 
 # gets quiz questions of the given level, as well as other random answers
-quiz_questions = db_connection.getQuizQuestions(1)
-print("quiz questions for level 1:")
-print(quiz_questions)
-other_answers = db_connection.getRandomAnswers(True, quiz_questions[0][0], 3) # True indicates that we are looking for english answers, False would cause this to return mandarin answers
-print("three other random answers besides " + quiz_questions[0][0] + ":")
-print(other_answers)
+quiz_questions = Quiz(1)
+print("number of quiz questions in level 1: " + str(quiz_questions.questionsLeft()))
+question1 = quiz_questions.popQuizQuestion()
+print("quiz question 1: " + question1.getQuestion())
+print("quiz question 1 answer: " + question1.getAnswer())
+print("quiz question 1 wrong answers:")
+print(question1.getWrongAnswers())
+print("quiz questions left: " + str(quiz_questions.questionsLeft()))
 
 # says that the user we created completed quiz 1
-db_connection.quizCompleted('jackson', 1)
+quiz_questions.quizCompleted('jackson')
 print("number of quizzes the user has completed after completing the first quiz: " + str(db_connection.getQuizzesCompleted('jackson')))
 
 # create two posts and save them to the database
@@ -61,6 +64,11 @@ post1.addComment(comment2)
 retrieved_comments = post1.getRecentComments()
 print("the comments on post 1 the user just made:")
 print(retrieved_comments)
+
+# retrieving a specific comment from the database
+specific_comment = post1.getComment(retrieved_comments[0].getAuthor(), retrieved_comments[0].getTimeCommented())
+print("specific retrieved comment by " + specific_comment.getAuthor() + ":")
+print(specific_comment.getContent())
 
 # delete the first comment we made on the 1st post from the database
 post1.deleteComment(comment1)

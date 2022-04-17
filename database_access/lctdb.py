@@ -104,6 +104,7 @@ class LCTDB:
         cur.close()
         return result
     
+    # saves that the given user has completed the given amount of quizzes in the database
     def quizCompleted(self, username: str, quizzesCompleted: int):
         cur = self.con.cursor()
         sql = """UPDATE LCTUSER SET quizzes_completed = %s WHERE username = %s;"""
@@ -224,6 +225,24 @@ class LCTDB:
         
         cur.close()
         return result
+
+    # retrieves a given comment from the given post from the database
+    # returns none if an error occurs
+    def getComment(self, post_title: str, post_author: str, post_time: str, author: str, time_commented: str):
+        cur = self.con.cursor()
+        sql = """SELECT author, time_commented, content FROM FORUM_COMMENT
+                 WHERE post_title = %s AND post_author = %s AND post_time = %s AND
+                 author = %s AND time_commented = %s;"""
+        result = None
+
+        try:
+            cur.execute(sql, (post_title, post_author, post_time, author, time_commented))
+            result = cur.fetchone()
+        except:
+            print("error retrieving comment on " + post_title + " by " + author)
+        
+        cur.close()
+        return result
     
     # deletes the given post from the database
     # will also delete all of the comments on the given post
@@ -265,7 +284,7 @@ class LCTDB:
     # Returns null if there was an error
     def getQuizQuestions(self, level: int):
         cur = self.con.cursor()
-        sql = """SELECT english_tr, mandarin_tr FROM QUIZ WHERE level = %s;"""
+        sql = """SELECT english_tr, mandarin_tr FROM QUIZ WHERE level = %s ORDER BY RANDOM();"""
         result = None
 
         try:
@@ -290,11 +309,11 @@ class LCTDB:
             sql = """SELECT mandarin_tr FROM QUIZ WHERE mandarin_tr != %s ORDER BY RANDOM() LIMIT %s;"""
         result = None
 
-        #try:
-        cur.execute(sql, (correct_ans, num_ans))
-        result = cur.fetchall()
-        #except:
-        #    print("error retrieving random quiz answers")
+        try:
+            cur.execute(sql, (correct_ans, num_ans))
+            result = cur.fetchall()
+        except:
+            print("error retrieving random quiz answers")
         
         cur.close()
         return result
