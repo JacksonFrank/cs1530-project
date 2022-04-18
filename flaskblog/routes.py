@@ -20,7 +20,6 @@ def about():
 
 @app.route("/forum")
 def home():
-    
     posts = ForumPost.getRecentPosts()
     return render_template('home.html', posts=posts, title='Forum')
 
@@ -55,7 +54,7 @@ def post(post_title):
         post.addComment(comment)
         print(comment.content)
         flash('Comment has been created successfully', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('post', post_title=post_title, post_author=author, post_time=time))
 
     comments = post.getRecentComments()
     return render_template('post.html', title=post_title, post=post, comments=comments, form=form)
@@ -73,3 +72,20 @@ def delete_post(post_title):
     flash('Post has been deleted successfully!', 'success')
 
     return redirect(url_for('home'))
+
+@app.route("/post/<post_title>/<comment_author>/deleteCmt", methods=['POST'])
+def delete_comment(post_title, comment_author):
+    #get a post
+    author = request.args.get('post_author')
+    time = request.args.get('post_time')
+    post = ForumPost.getPost(post_title, author, time)
+    #get and delete a comment
+    comment_time = request.args.get('comment_time')
+    comment = post.getComment(comment_author, comment_time)
+    post.deleteComment(comment)
+
+    #only the user who wrote it can update
+    #if post.author != current_user: abort(403)
+    flash('Comment has been deleted successfully!', 'success')
+
+    return redirect(url_for('post', post_title=post_title, post_author=author, post_time=time))
