@@ -40,3 +40,13 @@ def new_post():
         return redirect(url_for('home'))   #redirect to 'about' route (name of template)
 
     return render_template('create_post.html', title='New Post', form=form) 
+
+
+'''
+@app.route("/quiz", methods=['GET'])
+def get_quiz():
+    quizzes_taken = x
+    new_quiz = Quiz(quizzes_taken + 1)
+    first_question = new_quiz.popQuizQuestion()
+    return [first_question.getQuestion(), first_question.getRandomAnswers()]
+'''
