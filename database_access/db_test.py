@@ -30,6 +30,8 @@ print("quiz question 1: " + question1.getQuestion())
 print("quiz question 1 answer: " + question1.getAnswer())
 print("quiz question 1 wrong answers:")
 print(question1.getWrongAnswers())
+print("quiz question 1 all answers in random order: ")
+print(question1.getRandomAnswers())
 print("quiz questions left: " + str(quiz_questions.questionsLeft()))
 
 # says that the user we created completed quiz 1

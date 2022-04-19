@@ -76,7 +76,14 @@ class QuizQuestion:
 
     # gets wrong answers
     def getWrongAnswers(self):
-        return self.wrong_answers      
+        return self.wrong_answers
+
+    # returns a list of all answers with correct answer inserted randomly among all of the wrong answers
+    def getRandomAnswers(self):
+        answers = []
+        answers.extend(self.wrong_answers)
+        answers.insert(random.randint(0, 3), self.getAnswer())
+        return answers  
 
 
 
