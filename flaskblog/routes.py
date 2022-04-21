@@ -42,11 +42,9 @@ def new_post():
     return render_template('create_post.html', title='New Post', form=form) 
 
 
-'''
-@app.route("/quiz", methods=['GET'])
+@app.route("/quiz", methods=['GET', 'POST'])
 def get_quiz():
-    quizzes_taken = x
-    new_quiz = Quiz(quizzes_taken + 1)
-    first_question = new_quiz.popQuizQuestion()
-    return [first_question.getQuestion(), first_question.getRandomAnswers()]
-'''
+    
+    newquiz = Quiz(2)
+    return render_template('quiz.html', quiz=newquiz)
+
