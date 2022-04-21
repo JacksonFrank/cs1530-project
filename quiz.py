@@ -1,5 +1,7 @@
 # Class that represents an instance of a quiz
 
+import array
+from pickle import FALSE
 from database_access.lctdb import LCTDB
 import enum
 import random
@@ -12,6 +14,7 @@ class Quiz:
 
     def __init__(self, level: int):
         self.quiz_questions = []
+        self.quiz_answers = []
         self.level = level
         db_connection = LCTDB()
         quiz_data = db_connection.getQuizQuestions(level)
@@ -33,6 +36,9 @@ class Quiz:
         db_connection = LCTDB()
         db_connection.quizCompleted(username, self.level)
         db_connection.closeCon()
+
+    def addAnswers(self, answer: str):
+         self.quiz_answers.append(answer)
 
 
 class QuizQuestion:
@@ -76,7 +82,15 @@ class QuizQuestion:
 
     # gets wrong answers
     def getWrongAnswers(self):
-        return self.wrong_answers      
+        return self.wrong_answers
+
+    # returns a list of all answers with correct answer inserted randomly among all of the wrong answers
+    def getRandomAnswers(self):
+        answers = []
+        answers.extend(self.wrong_answers)
+        answers.insert(random.randint(0, 3), self.getAnswer())
+        return answers  
+
 
 
 

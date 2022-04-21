@@ -89,9 +89,19 @@ class ForumUser:
         db_connection.closeCon()
         return success
 
+
+    @staticmethod
+    def getQuizLevel(username):
+        db_connection = LCTDB()
+        level = db_connection.getQuizzesCompleted(username)
+        db_connection.closeCon()
+        return level
+
     @staticmethod
     def current_user():
         return session.get("_username")
+
+   
 
     @staticmethod
     def login_require(func):

@@ -1,3 +1,4 @@
+DELETE FROM QUIZ;
 INSERT INTO QUIZ VALUES ('Hello', '你好', 1);
 INSERT INTO QUIZ VALUES ('Goodbye', '再见', 1);
 INSERT INTO QUIZ VALUES ('Thank you', '谢谢', 1);
