@@ -32,7 +32,6 @@ def new_post():
     form = PostForm() #initialize a form
 
     if form.validate_on_submit():               #check if validated when submitted (create post)
-        #db_connection.registerUser("Zirui", "123456789")
         post = ForumPost()
         post.createPost(form.title.data, ForumUser.current_user(), form.content.data)
 
