@@ -27,11 +27,11 @@ class RegisterForm(UserForm):
         validators.DataRequired(),
         validators.EqualTo('password', message='Password not matched')
     ])
-    submit = fields.SubmitField("Register Submit")
+    submit = fields.SubmitField("Register")
 
 
 class LoginForm(UserForm):
-    submit = fields.SubmitField("Login Submit")
+    submit = fields.SubmitField("Login")
 
 
 def forum_user_mount(app: Flask):
@@ -46,7 +46,7 @@ def forum_user_mount(app: Flask):
             if ForumUser.login(username=form.username.data, password=form.password.data):
                 return redirect(url_for('about'))
             flash("Incorrect username/passowrd", "warning")
-        return render_template("login.html", form=form)
+        return render_template("login.html", form=form, title='Login')
 
     @app.route("/logout")
     def logout():
@@ -61,7 +61,7 @@ def forum_user_mount(app: Flask):
                 flash("User has been created successfully", 'success')
                 return redirect(url_for("login"))
             flash('"%s" User already exists' % form.username.data, 'warning')
-        return render_template("register.html", form=form)
+        return render_template("register.html", form=form, title='register')
 
 
 class ForumUser:

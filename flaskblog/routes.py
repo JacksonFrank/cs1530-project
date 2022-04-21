@@ -22,6 +22,7 @@ def about():
 
 
 @app.route("/forum")
+@ForumUser.login_require
 def home():
     posts = ForumPost.getRecentPosts()
     return render_template('home.html', posts=posts, title='Forum')
@@ -48,6 +49,7 @@ def post(post_title):
     time = request.args.get('post_time')
     post = ForumPost.getPost(post_title, author, time)
 
+    cur_user = ForumUser.current_user()
     #comments
     form = CommentForm()
     if form.validate_on_submit():
@@ -57,10 +59,10 @@ def post(post_title):
         post.addComment(comment)
         print(comment.content)
         flash('Comment has been created successfully', 'success')
-        return redirect(url_for('post', post_title=post_title, post_author=author, post_time=time))
+        return redirect(url_for('post', post_title=post_title, post_author=author, post_time=time, cur_user=cur_user))
 
     comments = post.getRecentComments()
-    return render_template('post.html', title=post_title, post=post, comments=comments, form=form)
+    return render_template('post.html', title=post_title, post=post, comments=comments, form=form, cur_user=cur_user)
 
 @app.route("/post/<post_title>/delete", methods=['POST'])
 def delete_post(post_title):
