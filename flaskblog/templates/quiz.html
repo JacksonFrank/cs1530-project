@@ -1,0 +1,11 @@
+{% extends "layout.html" %} <!--inherit-->
+{% block content %}
+
+{% for question in quiz.quiz_questions %}
+    <p>{{ question.getQuestion()}}</p>
+    {% for answer in question.getRandomAnswers() %}
+    <input type = "radio", name = "{{question.getQuestion()}}", value ="{{answer}}">{{answer}}<br>
+        {% endfor %}
+{% endfor %}
+{% endblock content %}
+
