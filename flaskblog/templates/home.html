@@ -1,0 +1,18 @@
+{% extends "layout.html" %} <!--inherit-->
+
+    {% block content %}
+        {% for post in posts %}
+        <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="article-author mr-2" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.time_posted.strftime('%Y-%m-%d') }}</small>
+              </div>
+              <h2><a class="article-title" href="{{ url_for('post', post_title=post.title, post_author=post.author, post_time=post.time_posted) }}">{{ post.title }}</a></h2> <!--change to post.id later-->
+            </div>
+          </article>
+        {% endfor %}
+        <a href="/post/new" class="btn btn-outline-info" role="button">
+            New Post
+        </a>
+    {% endblock content %}

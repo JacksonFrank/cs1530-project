@@ -1,0 +1,73 @@
+{% extends "layout.html" %} <!--inherit-->
+
+    {% block content %}
+        <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="article-author mr-2" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.time_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                <!--need to verify the user-->
+                {% if post.author == cur_user %}
+                <div>
+                  <form action="{{ url_for('delete_post', post_title=post.title, post_author=post.author, post_time=post.time_posted) }}" method="POST">
+                    <input type="submit" class="btn btn-outline-primary btn-sm mt-1 mb-1" value="Delete">
+                  </form>
+                </div>
+                {% endif %}
+              </div>
+              <h2 class="article-title">{{ post.title }}</h2>
+              <p class="article-content">{{ post.content }}</p>
+            </div>
+          </article>
+        
+
+        <!--comment textarea-->
+        <div id="comment-area" class="content-section collapse in">
+          <form method="POST", action="">
+              {{ form.hidden_tag() }} 
+              <fieldset class="form-group">   <!--group a set of elements-->
+                  <legend><h4>New Comment</h4></legend>   
+                  <div class="form-group">  <!--content-->
+                      {% if form.content.errors %}
+                          {{ form.content(class="form-control form-control-sm") }}
+                          <div class="invalid-feedback">
+                              {% for error in form.content.errors%}
+                                  <span>{error}</span>
+                              {% endfor%}
+                          </div>
+                      {% else %}
+                          {{ form.content(class="form-control form-control-sm") }}
+                      {% endif %}
+                  </div>
+                  <div class="form-group">    <!--submit button-->
+                      {{ form.submit(class="btn btn-outline-info") }}
+                  </div>
+              </fieldset>
+          </form>
+      </div>
+        
+        <!--comment-->
+        {% for comment in comments %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="article-author mr-2" href="#">{{ comment.author }}</a>
+              <small class="text-muted">{{ comment.time_commented.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                <!--delete btn-->
+                {% if comment.author == cur_user%}
+                <form action="{{ url_for('delete_comment',  post_title=post.title, post_author=post.author, post_time=post.time_posted, comment_author=comment.author, comment_time=comment.time_commented) }}" method="POST">
+                  <input type="submit" class="btn btn-outline-secondary btn-sm mt-1 mb-1" value="Delete">
+                </form>
+                {% endif %}
+            </div>
+            <p class="article-content">{{ comment.content }}</p>
+          </div>
+        </article>
+        {% endfor %}
+
+        <a href="#comment-area" class="btn btn-outline-info mb-4" role="button" data-toggle="collapse">
+          Comment
+      </a>
+
+
+    {% endblock content %}
